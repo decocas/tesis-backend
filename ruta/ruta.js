@@ -11,7 +11,9 @@ const control= require ('../control/controlador');
 
 rout.get('/', control.listar);
 rout.post('/', control.crear);
-rout.delete('/',control.Eliminar);
+rout.delete('/:id',control.Eliminar);
 rout.put('/:id',control.Editar);
 rout.get('/:id',control.getId);
+//rout.get('/:responsable', control.getName);
+
 module.exports=rout;

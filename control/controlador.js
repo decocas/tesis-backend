@@ -9,6 +9,8 @@ c.crear= async (req,res)=>{
     res.json('Entrada exitosa');
 };
 
+ 
+
 c.listar= async (req, res)=>{
     const m= await mercancia.find();
     res.json(m);
@@ -22,10 +24,11 @@ console.log('borrado ok');
 
 c.Editar= async(req, res)=>{
     const a={ cantidad_buen_estado: req.body.cantidad_buen_estado};
-    const query=await mercancia.findOneAndUpdate(req.params._id,{$set:a},{new:false},(err, doc)=>{
+   await mercancia.updateOne({"_id":req.params.id},{$set:a},{upsert:true},(err, doc)=>{
         if(err){
             console.log('algo esta mal');
         } 
+        console.log(mercancia);
         console.log(doc);
     });
     res.json({status:'ok'});
@@ -36,4 +39,9 @@ c.getId= async (req,res)=>{
        res.json(merca); 
   };
 
+  c.getName=async(req, res)=>{
+
+  const merca=await mercancia.findOne({"responsable":req.params.responsable});
+   res.json(merca);
+  };
 module.exports=c;

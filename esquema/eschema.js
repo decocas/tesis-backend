@@ -1,8 +1,9 @@
 const eqm = require('mongoose');
+  
 const {Schema} = eqm; // constructor siempre en mayusculas
-
+  
 const esquema=new Schema({
-    _id:{type:String, require:false},
+    _id:{type:String, require:true},
     nombre:{type:String, require:true},
     tipo_mercancia:{type:String, require:true},
     cantidad_mal_estado:{type:Number, require:false},
@@ -15,6 +16,10 @@ const esquema=new Schema({
     telefono:{type:String, required:true},
     mail:{type:String, required:true},
     serial_container:{type:String, require:true}
-
+ 
 });
+
+ 
+
 module.exports= eqm.model('mercancia',esquema);
+ 
