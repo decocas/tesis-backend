@@ -1,11 +1,15 @@
 const c={};
+ 
 const mercancia=require('../esquema/eschema');
+ 
+ 
+
  
 c.crear= async (req,res)=>{
     const m= new mercancia(req.body);
     await m.save();
     console.log('entrada existosa');
-    
+     
     res.json('Entrada exitosa');
 };
 
@@ -23,7 +27,13 @@ console.log('borrado ok');
 };
 
 c.Editar= async(req, res)=>{
-    const a={ cantidad_buen_estado: req.body.cantidad_buen_estado};
+    const a={ cantidad_buen_estado: req.body.cantidad_buen_estado,
+                salida:{f_salida:req.body.f_salida,
+                        responsable:req.body.responsable,   
+                        id_cliente:req.body.id_cliente,
+                        telefono:req.body.telefono,
+                        mail:req.body.mail
+                }};
    await mercancia.updateOne({"_id":req.params.id},{$set:a},{upsert:true},(err, doc)=>{
         if(err){
             console.log('algo esta mal');
@@ -35,13 +45,14 @@ c.Editar= async(req, res)=>{
 }
 
 c.getId= async (req,res)=>{
-    const merca= await mercancia.findById(req.params.id);
+    const merca= await mercancia.findById(req.params.id, (err,doc)=>{
+        if (err){
+            console.log('error');
+        }
+        console.log(doc);
+    });
        res.json(merca); 
   };
 
-  c.getName=async(req, res)=>{
-
-  const merca=await mercancia.findOne({"responsable":req.params.responsable});
-   res.json(merca);
-  };
+  
 module.exports=c;

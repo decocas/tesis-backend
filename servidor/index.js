@@ -9,7 +9,7 @@ aplicacion.listen(3000,()=>{
 aplicacion.get('/', (req,res)=>{
     res.send('cargado..');
 });*/
-
+ 
 aplicacion.use(express.json());
 aplicacion.use(cors());
 aplicacion.use('/index',require('../ruta/ruta'));

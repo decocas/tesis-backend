@@ -14,6 +14,6 @@ rout.post('/', control.crear);
 rout.delete('/:id',control.Eliminar);
 rout.put('/:id',control.Editar);
 rout.get('/:id',control.getId);
-//rout.get('/:responsable', control.getName);
+
 
 module.exports=rout;
